@@ -1,3 +1,103 @@
 {
-	
+    "entity.wandering_trader.ambient": {
+        "sounds": [
+            "traders:mob/wandering_trader/idle1",
+            "traders:mob/wandering_trader/idle2",
+            "traders:mob/wandering_trader/idle3",
+            "traders:mob/wandering_trader/idle4",
+            "traders:mob/wandering_trader/idle5"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.ambient"
+    },
+    "entity.wandering_trader.death": {
+        "sounds": [
+            "traders:mob/wandering_trader/death"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.death"
+    },
+    "entity.wandering_trader.disappeared": {
+        "sounds": [
+            {
+                "name": "traders:mob/wandering_trader/disappeared1",
+                "volume": 0.8
+            },
+            {
+                "name": "traders:mob/wandering_trader/disappeared2",
+                "volume": 0.8
+            }
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.disappeared"
+    },
+    "entity.wandering_trader.drink_milk": {
+        "sounds": [
+            "traders:mob/wandering_trader/drink_milk1",
+            "traders:mob/wandering_trader/drink_milk2",
+            "traders:mob/wandering_trader/drink_milk3",
+            "traders:mob/wandering_trader/drink_milk4",
+            "traders:mob/wandering_trader/drink_milk5"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.drink_milk"
+    },
+    "entity.wandering_trader.drink_potion": {
+        "sounds": [
+            {
+                "name": "traders:mob/wandering_trader/drink_potion",
+                "volume": 0.7
+            },
+            {
+                "name": "random/drink",
+                "volume": 0.65
+            }
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.drink_potion"
+    },
+    "entity.wandering_trader.hurt": {
+        "sounds": [
+            "traders:mob/wandering_trader/hurt1",
+            "traders:mob/wandering_trader/hurt2",
+            "traders:mob/wandering_trader/hurt3",
+            "traders:mob/wandering_trader/hurt4"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.hurt"
+    },
+    "entity.wandering_trader.no": {
+        "sounds": [
+            "traders:mob/wandering_trader/no1",
+            "traders:mob/wandering_trader/no2",
+            "traders:mob/wandering_trader/no3",
+            "traders:mob/wandering_trader/no4",
+            "traders:mob/wandering_trader/no5"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.no"
+    },
+    "entity.wandering_trader.reappeared": {
+        "sounds": [
+            {
+                "name": "traders:mob/wandering_trader/reappeared1",
+                "volume": 0.8
+            },
+            {
+                "name": "traders:mob/wandering_trader/reappeared2",
+                "volume": 0.8
+            }
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.reappeared"
+    },
+    "entity.wandering_trader.trade": {
+        "sounds": [
+            "traders:mob/wandering_trader/haggle1",
+            "traders:mob/wandering_trader/haggle2",
+            "traders:mob/wandering_trader/haggle3"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.trade"
+    },
+    "entity.wandering_trader.yes": {
+        "sounds": [
+            "traders:mob/wandering_trader/yes1",
+            "traders:mob/wandering_trader/yes2",
+            "traders:mob/wandering_trader/yes3",
+            "traders:mob/wandering_trader/yes4"
+        ],
+        "subtitle": "subtitles.traders.entity.wandering_trader.yes"
+    }
 }

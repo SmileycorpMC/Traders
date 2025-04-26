@@ -1,1 +1,12 @@
-entity.traders.WanderingTrader.name=Wandering Trader
+entity.traders.wandering_trader.name=Wandering Trader
+entity.traders.trader_llama=Trader Llama
+subtitles.traders.entity.wandering_trader.ambient=Wandering Trader mumbles
+subtitles.traders.entity.wandering_trader.death=Wandering Trader dies
+subtitles.traders.entity.wandering_trader.disappeared=Wandering Trader disappears
+subtitles.traders.entity.wandering_trader.drink_milk=Wandering Trader drinks milk
+subtitles.traders.entity.wandering_trader.drink_potion=Wandering Trader drinks potion
+subtitles.traders.entity.wandering_trader.hurt=Wandering Trader hurts
+subtitles.traders.entity.wandering_trader.no=Wandering Trader disagrees
+subtitles.traders.entity.wandering_trader.reappeared=Wandering Trader appears
+subtitles.traders.entity.wandering_trader.trade=Wandering Trader trades
+subtitles.traders.entity.wandering_trader.yes=Wandering Trader agrees
