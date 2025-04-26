@@ -17,10 +17,6 @@ repositories {
 	maven {
         url "https://www.cursemaven.com"
     }
-    maven {
-        name = "Modrinth"
-        url = "https://api.modrinth.com/maven"
-    }
 }
         
 apply plugin: 'net.minecraftforge.gradle'
@@ -30,7 +26,7 @@ apply plugin: 'org.spongepowered.mixin'
 apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
-version = "1.12.2-1.1.3b"
+version = "1.12.2-1.0.0-DEV"
 group = "net.smileycorp.traders"
 archivesBaseName = "Traders"
 
@@ -39,7 +35,7 @@ sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = co
 minecraft {
     mappings channel: 'snapshot', version: '20171003-1.12'
     
-    accessTransformer = file('src/main/resources/META-INF/raids_at.cfg')
+    accessTransformer = file('src/main/resources/META-INF/traders_at.cfg')
 
     // Default run configurations.
     // These can be tweaked, removed, or duplicated as needed.
@@ -76,6 +72,8 @@ configurations {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
+    implementation "curse.maven:atlas-463826:5877784"
+    implementation "curse.maven:raids-977633:5626565"
 	implementation "org.spongepowered:mixin:0.8"
 }
 
