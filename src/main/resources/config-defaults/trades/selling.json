@@ -373,7 +373,7 @@
                 "count": 4
             },
             "output": {
-                "item": "minecraft:slimeball"
+                "item": "minecraft:slime_ball"
             },
             "max_uses": 5
         },
@@ -399,7 +399,7 @@
                 "count": 5
             },
             "output": {
-                "ore": "saplingTree"
+                "ore": "treeSapling"
             },
             "max_uses": 8,
             "duplicates": true
