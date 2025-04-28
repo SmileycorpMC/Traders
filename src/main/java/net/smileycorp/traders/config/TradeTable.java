@@ -37,9 +37,9 @@ public class TradeTable {
         List<Trade> trades = filterTrades(ctx);
         if (trades.isEmpty()) return recipes;
         for (int i = 0; i < (min == max ? min : min + rand.nextInt(max - min)); i++) {
-            Trade trade = trades.get(rand.nextInt(recipes.size()));
+            Trade trade = trades.get(rand.nextInt(trades.size()));
             recipes.add(trade.generate(ctx));
-            if (trade.canDuplicate(ctx)) trades.remove(trade);
+            if (!trade.canDuplicate(ctx)) trades.remove(trade);
         }
         return recipes;
     }
@@ -55,8 +55,10 @@ public class TradeTable {
         int max = obj.has("max") ? obj.get("max").getAsInt() : 1;
         if (max < min) throw new IndexOutOfBoundsException("max cannot be less than min");
         List<TradeCondition> conditions = Lists.newArrayList();
-        if (obj.has("conditions")) for (JsonElement element : obj.get("conditions").getAsJsonArray())
-            conditions.add(ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject()));
+        if (obj.has("conditions")) for (JsonElement element : obj.get("conditions").getAsJsonArray()) {
+            TradeCondition condition = ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject());
+            if (condition != null) conditions.add(condition);
+        }
         List<Trade> trades = Lists.newArrayList();
         if (!obj.has("trades")) throw new NullPointerException("table must specify \"trades\" property");
         for (JsonElement element : obj.get("trades").getAsJsonArray()) {
