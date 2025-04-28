@@ -38,7 +38,16 @@ public class TradeTable {
         if (trades.isEmpty()) return recipes;
         for (int i = 0; i < (min == max ? min : min + rand.nextInt(max - min)); i++) {
             Trade trade = trades.get(rand.nextInt(trades.size()));
-            recipes.add(trade.generate(ctx));
+            MerchantRecipe recipe = trade.generate(ctx);
+            if (recipe.getItemToBuy().isEmpty()) {
+                TradersLogger.logInfo("trade " + trade + " has empty item_1, not adding trade");
+                continue;
+            }
+            if (recipe.getItemToSell().isEmpty()) {
+                TradersLogger.logInfo("trade " + trade + " has empty output, not adding trade");
+                continue;
+            }
+            recipes.add(recipe);
             if (!trade.canDuplicate(ctx)) trades.remove(trade);
         }
         return recipes;

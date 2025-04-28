@@ -49,6 +49,17 @@ public class Trade {
         return new MerchantRecipe(item1, item2, output.get(ctx), 0, max_uses);
     }
     
+    @Override
+    public String toString() {
+       StringBuilder builder = new StringBuilder(super.toString());
+       builder.append("[");
+       if (item1 != TradeItem.EMPTY) builder.append(item1);
+       if (item2 != TradeItem.EMPTY) builder.append(" + " + item2);
+       if (output != TradeItem.EMPTY) builder.append(" -> " + output);
+       builder.append("]");
+       return builder.toString();
+    }
+    
     public static Trade deserialize(JsonElement json) throws Exception {
         if (!json.isJsonObject()) throw new Exception("Trade must be a Json Object");
         JsonObject obj = json.getAsJsonObject();
