@@ -87,13 +87,12 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
             return true;
         }
         if (holdingSpawnEggOfClass(stack, this.getClass()) |! isEntityAlive() || isTrading() || player.isSneaking()) return super.processInteract(player, hand);
+        if (world.isRemote) return true;
         if (buyingList == null) populateBuyingList();
         if (hand == EnumHand.MAIN_HAND) player.addStat(StatList.TALKED_TO_VILLAGER);
         if (buyingList.isEmpty()) return super.processInteract(player, hand);
-        if (!world.isRemote) {
-            setCustomer(player);
-            player.displayVillagerTradeGui(this);
-        }
+        setCustomer(player);
+        player.displayVillagerTradeGui(this);
         return true;
     }
     
