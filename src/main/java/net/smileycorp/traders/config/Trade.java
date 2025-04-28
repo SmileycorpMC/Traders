@@ -60,8 +60,10 @@ public class Trade {
         Value<Boolean> canDuplicate = obj.has("can_duplicate") ? ValueRegistry.INSTANCE.readValue(DataType.BOOLEAN, obj.get("can_duplicate")) :
                 new StaticValue<>(false);
         List<TradeCondition> conditions = Lists.newArrayList();
-        if (obj.has("conditions")) for (JsonElement element : obj.get("conditions").getAsJsonArray())
-            conditions.add(ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject()));
+        if (obj.has("conditions")) for (JsonElement element : obj.get("conditions").getAsJsonArray()) {
+            TradeCondition condition = ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject());
+            if (condition != null) conditions.add(condition);
+        }
         return new Trade(TradeItem.deserialize(obj.get("item_1")), item2, TradeItem.deserialize(obj.get("output")), maxUses, canDuplicate, conditions);
     }
     

@@ -27,7 +27,7 @@ public class ConditionRegistry {
     
     public TradeCondition readCondition(JsonObject json) {
         try {
-            if (json.has("name")) return conditions.get(json.get("name").getAsString()).apply(json);
+            if (json.has("condition")) return conditions.get(json.get("condition").getAsString()).apply(json);
         } catch (Exception e) {
             TradersLogger.logError("Failed reading condition " + json, e);
         }

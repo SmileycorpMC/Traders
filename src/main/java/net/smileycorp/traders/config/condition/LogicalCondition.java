@@ -41,7 +41,8 @@ public class LogicalCondition implements TradeCondition {
 			List<TradeCondition> conditions = Lists.newArrayList();
 			for (JsonElement element : json.get("value").getAsJsonArray()) {
 				try {
-					conditions.add(ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject()));
+					TradeCondition condition = ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject());
+					if (condition != null) conditions.add(condition);
 				} catch(Exception e) {
 					TradersLogger.logError("Failed to read condition of logical " + element, e);
 				}

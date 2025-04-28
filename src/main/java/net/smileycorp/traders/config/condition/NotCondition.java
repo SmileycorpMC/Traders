@@ -19,7 +19,8 @@ public class NotCondition implements TradeCondition {
 
 	public static NotCondition deserialize(JsonObject json) {
 		try {
-			return new NotCondition(ConditionRegistry.INSTANCE.readCondition(json.get("value").getAsJsonObject()));
+			TradeCondition condition = ConditionRegistry.INSTANCE.readCondition(json.get("value").getAsJsonObject());
+			if (condition != null) return new NotCondition(condition);
 		} catch(Exception e) {
 			TradersLogger.logError("Incorrect parameters for NotCondition", e);
 		}

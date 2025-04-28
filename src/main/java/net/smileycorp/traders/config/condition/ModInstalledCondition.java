@@ -23,7 +23,7 @@ public class ModInstalledCondition implements TradeCondition {
     
     public static ModInstalledCondition deserialize(JsonObject json) {
         try {
-            return new ModInstalledCondition(ValueRegistry.INSTANCE.readValue(DataType.STRING, json.get("value").getAsJsonObject()));
+            return new ModInstalledCondition(ValueRegistry.INSTANCE.readValue(DataType.STRING, json.get("value")));
         } catch(Exception e) {
             TradersLogger.logError("Incorrect parameters for ModCondition", e);
         }
