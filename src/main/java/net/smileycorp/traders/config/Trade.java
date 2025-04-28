@@ -50,7 +50,7 @@ public class Trade {
     }
     
     public static Trade deserialize(JsonElement json) throws Exception {
-        if (json.isJsonObject()) return null;
+        if (!json.isJsonObject()) throw new Exception("Trade must be a Json Object");
         JsonObject obj = json.getAsJsonObject();
         if (!obj.has("item_1")) throw new Exception("Trade must specify item_1");
         if (!obj.has("output")) throw new Exception("Trade must specify output");
