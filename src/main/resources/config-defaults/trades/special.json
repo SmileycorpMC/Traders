@@ -39,7 +39,7 @@
             },
             "output": {
                 "item": "minecraft:dirt",
-                "data": 2,
+                "meta": 2,
                 "count": 3
             },
             "max_uses": 6
