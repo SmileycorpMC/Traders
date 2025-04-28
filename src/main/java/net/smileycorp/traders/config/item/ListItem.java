@@ -20,16 +20,18 @@ public class ListItem implements TradeItem {
     private final Value<String> nbt;
     private final Value<Integer> count;
     private final ItemFunction[] functions;
+    private final String json;
     
-    ListItem(List<TradeItem> items) {
-        this(items, new StaticValue<>(1), new StaticValue<>("{}"));
+    ListItem(String json, List<TradeItem> items) {
+        this(json, items, new StaticValue<>(1), new StaticValue<>("{}"));
     }
     
-    ListItem(List<TradeItem> items, Value<Integer> count, Value<String> nbt, ItemFunction... functions) {
+    ListItem(String json, List<TradeItem> items, Value<Integer> count, Value<String> nbt, ItemFunction... functions) {
         this.items = items;
         this.count = count;
         this.nbt = nbt;
         this.functions = functions;
+        this.json = json;
     }
     
     @Override
@@ -45,6 +47,11 @@ public class ListItem implements TradeItem {
         return stack;
     }
     
+    @Override
+    public String toString() {
+        return json;
+    }
+    
     public static TradeItem deserialize(JsonObject json, Value<Integer> count, Value<String> nbt, ItemFunction... functions) {
         try {
             List<TradeItem> items = Lists.newArrayList();
@@ -52,7 +59,7 @@ public class ListItem implements TradeItem {
                 TradeItem item = TradeItem.deserialize(element);
                 if (item != EMPTY) items.add(item);
             }
-            return new ListItem(items, count, nbt, functions);
+            return new ListItem(json.toString(), items, count, nbt, functions);
         } catch (Exception e) {}
         return EMPTY;
     }

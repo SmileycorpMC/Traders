@@ -20,19 +20,23 @@ public class StandardItem implements TradeItem {
     private final Value<String> item, nbt;
     private final Value<Integer> count, meta;
     private final ItemFunction[] functions;
+    private final String json;
     
-    StandardItem(Value<String> item, Value<Integer> count, Value<Integer> meta, Value<String> nbt, ItemFunction... functions) {
+    StandardItem(String json, Value<String> item, Value<Integer> count, Value<Integer> meta, Value<String> nbt, ItemFunction... functions) {
         this.item = item;
         this.count = count;
         this.meta = meta;
         this.nbt = nbt;
         this.functions = functions;
+        this.json = json;
     }
     
     @Override
     public ItemStack get(TradeContext ctx) {
         try {
-            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(this.item.get(ctx))), 1, meta.get(ctx));
+            int meta = this.meta.get(ctx);
+            TradersLogger.logInfo(item + ", " + meta);
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(this.item.get(ctx))), 1, meta);
             stack.setCount(MathHelper.clamp(count.get(ctx), 1, stack.getMaxStackSize()));
             try {
                 NBTTagCompound nbt = JsonToNBT.getTagFromJson(this.nbt.get(ctx));
@@ -46,11 +50,16 @@ public class StandardItem implements TradeItem {
         return ItemStack.EMPTY;
     }
     
+    @Override
+    public String toString() {
+        return json;
+    }
+    
     public static TradeItem deserialize(JsonObject json, Value<Integer> count, Value<String> nbt, ItemFunction... functions) {
         try {
             Value<String> item = ValueRegistry.INSTANCE.readValue(DataType.STRING, json.get("item"));
             Value<Integer> meta = json.has("meta") ? ValueRegistry.INSTANCE.readValue(DataType.INT, json.get("meta")) : new StaticValue<>(0);
-            return new StandardItem(item, count, meta, nbt, functions);
+            return new StandardItem(json.toString(), item, count, meta, nbt, functions);
         } catch (Exception e) {}
         return EMPTY;
     }

@@ -26,7 +26,7 @@ public interface TradeItem {
             for (JsonElement element : json.getAsJsonArray()) {
                 TradeItem item = deserialize(element);
                 if (item != EMPTY) items.add(item);
-                return new ListItem(items);
+                return new ListItem(json.toString(), items);
             }
         }
         if (!json.isJsonObject()) return EMPTY;
