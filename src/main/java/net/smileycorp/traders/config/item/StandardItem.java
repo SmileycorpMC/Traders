@@ -34,9 +34,7 @@ public class StandardItem implements TradeItem {
     @Override
     public ItemStack get(TradeContext ctx) {
         try {
-            int meta = this.meta.get(ctx);
-            TradersLogger.logInfo(this + ", " + meta);
-            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(this.item.get(ctx))), 1, meta);
+            ItemStack stack = new ItemStack(ForgeRegistries.ITEMS.getValue(new ResourceLocation(this.item.get(ctx))), 1, meta.get(ctx));
             stack.setCount(MathHelper.clamp(count.get(ctx), 1, stack.getMaxStackSize()));
             try {
                 NBTTagCompound nbt = JsonToNBT.getTagFromJson(this.nbt.get(ctx));
