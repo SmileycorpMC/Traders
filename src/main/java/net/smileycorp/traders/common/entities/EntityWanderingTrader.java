@@ -9,6 +9,8 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTUtil;
 import net.minecraft.stats.StatList;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.EnumHand;
@@ -36,8 +38,9 @@ import javax.annotation.Nullable;
 public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerchant{
     
     private EntityPlayer buyingPlayer;
-    private MerchantRecipeList buyingList;
+    private MerchantRecipeList offers;
     private BlockPos wanderTarget;
+    private int despawnDelay;
     
     public EntityWanderingTrader(World world) {
         super(world);
@@ -88,12 +91,20 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
         }
         if (holdingSpawnEggOfClass(stack, this.getClass()) |! isEntityAlive() || isTrading() || player.isSneaking()) return super.processInteract(player, hand);
         if (world.isRemote) return true;
-        if (buyingList == null) populateBuyingList();
+        if (offers == null) populateBuyingList();
         if (hand == EnumHand.MAIN_HAND) player.addStat(StatList.TALKED_TO_VILLAGER);
-        if (buyingList.isEmpty()) return super.processInteract(player, hand);
+        if (offers.isEmpty()) return super.processInteract(player, hand);
         setCustomer(player);
         player.displayVillagerTradeGui(this);
         return true;
+    }
+    
+    @Override
+    protected void updateAITasks() {
+        super.updateAITasks();
+        if (world.isRemote) return;
+        if (despawnDelay == 0 || isTrading()) return;
+        if (despawnDelay-- == 0) despawnEntity();
     }
     
     public boolean isTrading() {
@@ -101,7 +112,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     }
     
     private void populateBuyingList() {
-        buyingList = TradeDataLoader.INSTANCE.getTrades(this);
+        offers = TradeDataLoader.INSTANCE.getTrades(this);
     }
     
     @Override
@@ -111,6 +122,14 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
         if (action == EnumAction.EAT) super.updateItemUse(stack, eatingParticleCount);
         else if (action == EnumAction.DRINK) playSound(stack.getItem() == Items.MILK_BUCKET ? TradersSoundEvents.WANDERING_TRADER_DRINK_MILK :
                         TradersSoundEvents.WANDERING_TRADER_DRINK_POTION, 0.5f, world.rand.nextFloat() * 0.1f + 0.9f);
+    }
+    
+    public void setDespawnDelay(int delay) {
+        despawnDelay = delay;
+    }
+    
+    public int getDespawnDelay() {
+        return despawnDelay;
     }
     
     public void setWanderTarget(BlockPos pos) {
@@ -133,12 +152,12 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     
     @Override
     public MerchantRecipeList getRecipes(EntityPlayer entityPlayer) {
-        return buyingList;
+        return offers;
     }
     
     @Override
     public void setRecipes(MerchantRecipeList trades) {
-        buyingList = trades;
+        offers = trades;
     }
     
     @Override
@@ -184,6 +203,11 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     }
     
     @Override
+    protected boolean canDespawn() {
+        return false;
+    }
+    
+    @Override
     protected SoundEvent getAmbientSound() {
         return isTrading() ? TradersSoundEvents.WANDERING_TRADER_TRADE : TradersSoundEvents.WANDERING_TRADER_AMBIENT;
     }
@@ -202,6 +226,22 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     @Override
     protected ResourceLocation getLootTable() {
         return LootTableList.ENTITIES_VILLAGER;
+    }
+    
+    @Override
+    public void readEntityFromNBT(NBTTagCompound nbt) {
+        super.readEntityFromNBT(nbt);
+        if (nbt.hasKey("DespawnDelay")) despawnDelay = nbt.getInteger("DespawnDelay");
+        if (nbt.hasKey("WanderTarget")) wanderTarget = NBTUtil.getPosFromTag(nbt.getCompoundTag("WanderTarget"));
+        if (nbt.hasKey("Offers")) offers = new MerchantRecipeList(nbt.getCompoundTag("Offers"));
+    }
+    
+    @Override
+    public void writeEntityToNBT(NBTTagCompound nbt) {
+        super.writeEntityToNBT(nbt);
+        nbt.setInteger("DespawnDelay", despawnDelay);
+        nbt.setTag("WanderTarget", NBTUtil.createPosTag(wanderTarget));
+        nbt.setTag("Offers", offers.getRecipiesAsTags());
     }
     
 }
