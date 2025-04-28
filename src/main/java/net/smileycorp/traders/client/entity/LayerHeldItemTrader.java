@@ -21,15 +21,9 @@ public class LayerHeldItemTrader implements LayerRenderer<EntityWanderingTrader>
         GlStateManager.color(1, 1, 1);
         GlStateManager.pushMatrix();
         renderer.getMainModel().villagerNose.postRender(0.0625F);
-        GlStateManager.translate(-0.0625F, 0.53125F, 0.21875F);
         Minecraft mc = Minecraft.getMinecraft();
-        GlStateManager.translate(0.1875f, 0.1875f, 0);
-        GlStateManager.scale(0.875F, 0.875F, 0.875F);
-        GlStateManager.rotate(-20, 0, 0, 1);
-        GlStateManager.rotate(-60, 1, 0, 0);
-        GlStateManager.rotate(-30, 0, 0, 1);
-        GlStateManager.rotate(-15, 1, 0, 0);
-        GlStateManager.rotate(40, 0, 0, 1);
+        GlStateManager.translate(0, 0.4f, -0.4f);
+        GlStateManager.rotate(180, 1, 0,  0);
         mc.getItemRenderer().renderItem(entity, stack, ItemCameraTransforms.TransformType.THIRD_PERSON_RIGHT_HAND);
         GlStateManager.popMatrix();
     }

@@ -26,6 +26,7 @@ public class EntityAITraderDrink extends EntityAIBase {
     public void startExecuting() {
         entity.setHeldItem(EnumHand.MAIN_HAND, entity.isInvisible() ? new ItemStack(Items.MILK_BUCKET) :
                 PotionUtils.addPotionToItemStack(new ItemStack(Items.POTIONITEM), PotionTypes.INVISIBILITY));
+        entity.setActiveHand(EnumHand.MAIN_HAND);
     }
     
     @Override
