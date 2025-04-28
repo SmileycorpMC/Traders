@@ -28,7 +28,7 @@ public class Trade {
         this.output = output;
         this.max_uses = max_uses;
         this.can_duplicate = can_duplicate;
-       this.conditions = conditions;
+        this.conditions = conditions;
     }
     
     public boolean canApply(TradeContext ctx) {

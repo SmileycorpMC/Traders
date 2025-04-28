@@ -62,7 +62,10 @@ public class TradeTable {
         for (JsonElement element : obj.get("trades").getAsJsonArray()) {
             try {
                 Trade trade = Trade.deserialize(element);
-                if (trade != null) trades.add(trade);
+                if (trade != null) {
+                    trades.add(trade);
+                    TradersLogger.logInfo("Loaded trade " + element);
+                }
             } catch (Exception e) {
                 TradersLogger.logError("Failed loading trade " + element, e);
             }

@@ -44,8 +44,8 @@ public class TradeDataLoader {
         JsonParser parser = new JsonParser();
         for (File file : directory.listFiles((f, s) -> s.endsWith(".json"))) {
             try {
+                TradersLogger.logInfo("Loading trade table " + file.getName());
                 tables.add(TradeTable.deserialize(parser.parse(new FileReader(file))));
-                TradersLogger.logInfo("Loaded trade table " + file.getName());
             } catch (Exception e) {
                 TradersLogger.logError("Failed loading trade table " + file.getName(), e);
             }
