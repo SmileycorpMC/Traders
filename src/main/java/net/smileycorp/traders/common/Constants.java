@@ -14,7 +14,7 @@ public class Constants {
 	public static final String SERVER = PATH + "common.CommonProxy";
     
     public static String name(String name) {
-		return MODID + "." + name.replace("_", "");
+		return MODID + "." + name;
 	}
 	
 	public static ResourceLocation loc(String name) {
