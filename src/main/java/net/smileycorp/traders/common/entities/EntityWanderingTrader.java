@@ -101,7 +101,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     }
     
     private void populateBuyingList() {
-        TradeDataLoader.INSTANCE.getTrades(this);
+        buyingList = TradeDataLoader.INSTANCE.getTrades(this);
     }
     
     @Override
