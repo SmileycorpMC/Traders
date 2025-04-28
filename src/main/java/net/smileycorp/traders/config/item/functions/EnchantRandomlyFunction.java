@@ -7,7 +7,6 @@ import net.minecraft.world.storage.loot.functions.EnchantRandomly;
 import net.smileycorp.atlas.api.data.DataType;
 import net.smileycorp.traders.common.TradersLogger;
 import net.smileycorp.traders.config.TradeContext;
-import net.smileycorp.traders.config.condition.GameDifficultyCondition;
 import net.smileycorp.traders.config.values.Value;
 import net.smileycorp.traders.config.values.ValueRegistry;
 

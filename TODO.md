@@ -1,7 +1,3 @@
-Trader default trade generator
-
-Trader config reading
-
 Trader llama
 
 Trader llama ai

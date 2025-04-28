@@ -4,6 +4,7 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.village.MerchantRecipe;
+import net.smileycorp.traders.common.TradersLogger;
 import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.condition.TradeCondition;
 
@@ -18,19 +19,11 @@ public class TradeTable {
     private final List<TradeCondition> conditions;
     private final List<Trade> trades;
     
-    private TradeTable(JsonObject json) throws Exception {
-        min = json.has("min") ? json.get("min").getAsInt() : 1;
-        max = json.has("max") ? json.get("max").getAsInt() : 1;
-        if (max < min) throw new IndexOutOfBoundsException("max cannot be less than min");
-        conditions = Lists.newArrayList();
-        if (json.has("conditions")) for (JsonElement element : json.get("conditions").getAsJsonArray())
-            conditions.add(ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject()));
-        trades = Lists.newArrayList();
-        if (!json.has("trades")) throw new NullPointerException("table must specify \"trades\" property");
-        for (JsonElement element : json.get("trades").getAsJsonArray()) {
-            Trade trade = Trade.deserialize(element);
-            if (trade != null) trades.add(trade);
-        }
+    private TradeTable(int min, int max, List<TradeCondition> conditions, List<Trade> trades) {
+        this.min = min;
+        this.max = max;
+        this.conditions = conditions;
+        this.trades = trades;
     }
     
     public boolean canApply(TradeContext ctx) {
@@ -55,9 +48,26 @@ public class TradeTable {
         return trades.stream().filter(trade -> trade.canApply(ctx)).collect(Collectors.toList());
     }
     
-    static TradeTable read(JsonElement element) throws Exception {
-        if (!element.isJsonObject()) throw new Exception("table must be a JsonObject");
-        return new TradeTable(element.getAsJsonObject());
+    static TradeTable deserialize(JsonElement json) throws Exception {
+        if (!json.isJsonObject()) throw new Exception("table must be a JsonObject");
+        JsonObject obj = json.getAsJsonObject();
+        int min = obj.has("min") ? obj.get("min").getAsInt() : 1;
+        int max = obj.has("max") ? obj.get("max").getAsInt() : 1;
+        if (max < min) throw new IndexOutOfBoundsException("max cannot be less than min");
+        List<TradeCondition> conditions = Lists.newArrayList();
+        if (obj.has("conditions")) for (JsonElement element : obj.get("conditions").getAsJsonArray())
+            conditions.add(ConditionRegistry.INSTANCE.readCondition(element.getAsJsonObject()));
+        List<Trade> trades = Lists.newArrayList();
+        if (!obj.has("trades")) throw new NullPointerException("table must specify \"trades\" property");
+        for (JsonElement element : obj.get("trades").getAsJsonArray()) {
+            try {
+                Trade trade = Trade.deserialize(element);
+                if (trade != null) trades.add(trade);
+            } catch (Exception e) {
+                TradersLogger.logError("Failed loading trade " + element, e);
+            }
+        }
+        return new TradeTable(min, max, conditions, trades);
     }
 
 

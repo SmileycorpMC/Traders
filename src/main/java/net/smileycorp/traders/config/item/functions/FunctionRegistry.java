@@ -3,7 +3,6 @@ package net.smileycorp.traders.config.item.functions;
 import com.google.common.collect.Maps;
 import com.google.gson.JsonObject;
 import net.smileycorp.traders.common.TradersLogger;
-import net.smileycorp.traders.config.values.Value;
 
 import java.util.Map;
 
