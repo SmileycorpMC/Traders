@@ -240,8 +240,8 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     public void writeEntityToNBT(NBTTagCompound nbt) {
         super.writeEntityToNBT(nbt);
         nbt.setInteger("DespawnDelay", despawnDelay);
-        nbt.setTag("WanderTarget", NBTUtil.createPosTag(wanderTarget));
-        nbt.setTag("Offers", offers.getRecipiesAsTags());
+        if (wanderTarget != null) nbt.setTag("WanderTarget", NBTUtil.createPosTag(wanderTarget));
+        if (offers != null) nbt.setTag("Offers", offers.getRecipiesAsTags());
     }
     
 }
