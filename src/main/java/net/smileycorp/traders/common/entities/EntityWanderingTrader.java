@@ -24,6 +24,7 @@ import net.minecraft.village.MerchantRecipeList;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
+import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.fml.common.Loader;
 import net.smileycorp.traders.common.TradersSoundEvents;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderDrink;
@@ -151,8 +152,8 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     }
     
     @Override
-    public MerchantRecipeList getRecipes(EntityPlayer entityPlayer) {
-        return offers;
+    public MerchantRecipeList getRecipes(EntityPlayer player) {
+        return ForgeEventFactory.listTradeOffers(this, player, offers);
     }
     
     @Override
@@ -162,7 +163,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     
     @Override
     public void useRecipe(MerchantRecipe recipe) {
-        recipe.compensateToolUses();
+        recipe.incrementToolUses();
         livingSoundTime = -getTalkInterval();
         playSound(TradersSoundEvents.WANDERING_TRADER_YES, getSoundVolume(), getSoundPitch());
         if (!recipe.getRewardsExp()) return;
