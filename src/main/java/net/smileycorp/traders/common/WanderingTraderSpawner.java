@@ -50,6 +50,7 @@ public class WanderingTraderSpawner {
         trader.setHomePosAndDistance(pos, 16);
         trader.setWanderTarget(pos);
         trader.setDespawnDelay(48000);
+        TradersLogger.logInfo("Spawned trader at " + start);
         return true;
     }
     
