@@ -18,7 +18,7 @@ public class EntityTraderLlama extends EntityLlama {
     
     @Override
     protected void initEntityAI() {
-        super.entityInit();
+        super.initEntityAI();
         tasks.addTask(1, new EntityAIPanic(this, 2));
         targetTasks.addTask(1, new EntityAILlamaDefendTrader(this));
     }
