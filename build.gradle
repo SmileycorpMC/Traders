@@ -1,15 +1,12 @@
 buildscript {
     repositories {
         maven { url = 'https://maven.minecraftforge.net/' }
-		maven { url "https://repo.spongepowered.org/repository/maven-public/" }
         jcenter()
         mavenCentral()
 		gradlePluginPortal()
     }
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:3.+'
-		classpath 'org.spongepowered:mixingradle:0.7-SNAPSHOT'
-		classpath 'com.github.jengelman.gradle.plugins:shadow:2.0.4'
     }
 }
 
@@ -22,8 +19,6 @@ repositories {
 apply plugin: 'net.minecraftforge.gradle'
 // Only edit below this line, the above code adds and enables the necessary things for Forge to be setup.
 apply plugin: 'eclipse'
-apply plugin: 'org.spongepowered.mixin'
-apply plugin: 'com.github.johnrengelman.shadow'
 apply plugin: 'java'
 
 version = "1.12.2-1.0.0-DEV"
@@ -61,10 +56,6 @@ minecraft {
     }
 }
 
-repositories {
-    maven { url = 'https://repo.spongepowered.org/maven' }
-}
-
 configurations {
     embed
     compile.extendsFrom(embed)
@@ -74,7 +65,6 @@ dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
     implementation "curse.maven:atlas-463826:5877784"
     implementation "curse.maven:raids-977633:5626565"
-	implementation "org.spongepowered:mixin:0.8"
 }
 
 // Example for how to get properties into the manifest for reading by the runtime..
@@ -92,22 +82,6 @@ jar {
         
     }
 }
-
-shadowJar {
-	classifier = ''
-	exclude 'LICENSE.txt'
-	dependencies {
-		include(dependency("org.spongepowered:mixin:0.8"))
-	}
-}
-
-build.dependsOn(shadowJar)
-
-reobf {
-    shadowJar {}
-}
-
-build.dependsOn(reobf)
 
 processResources {
     inputs.property "version", project.version
