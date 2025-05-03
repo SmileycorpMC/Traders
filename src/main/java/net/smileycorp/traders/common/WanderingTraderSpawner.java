@@ -37,21 +37,25 @@ public class WanderingTraderSpawner {
     }
     
     private boolean spawn(WorldServer world) {
-        EntityPlayer player = world.playerEntities.get(world.rand.nextInt(world.playerEntities.size()));
+        if (world.playerEntities.isEmpty()) return false;
+        return spawn(world, world.playerEntities.get(world.rand.nextInt(world.playerEntities.size()))) != null;
+    }
+    
+    public EntityWanderingTrader spawn(WorldServer world, EntityPlayer player) {
         BlockPos pos = player.getPosition();
         Village village = world.getVillageCollection().getNearestVillage(pos, 48);
         if (village != null) pos = village.getCenter();
         BlockPos start = findSpawnPosition(world, pos, 48);
-        if (world.collidesWithAnyBlock(new AxisAlignedBB(pos, pos.add(1, 2, 1)))) return false;
+        if (world.collidesWithAnyBlock(new AxisAlignedBB(pos, pos.add(1, 2, 1)))) return null;
         EntityWanderingTrader trader = new EntityWanderingTrader(world);
         trader.setPosition(start.getX() + 0.5f, start.getY(), start.getZ() + 0.5f);
-        if (!world.spawnEntity(trader)) return false;
+        if (!world.spawnEntity(trader)) return null;
         for (int i = 0; i < 2; i++) spawnLlama(world, trader);
         trader.setHomePosAndDistance(pos, 16);
         trader.setWanderTarget(pos);
         trader.setDespawnDelay(48000);
         TradersLogger.logInfo("Spawned trader at " + start);
-        return true;
+        return trader;
     }
     
     private void spawnLlama(WorldServer world, EntityWanderingTrader trader) {

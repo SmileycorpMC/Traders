@@ -10,3 +10,6 @@ subtitles.traders.entity.wandering_trader.no=Wandering Trader disagrees
 subtitles.traders.entity.wandering_trader.reappeared=Wandering Trader appears
 subtitles.traders.entity.wandering_trader.trade=Wandering Trader trades
 subtitles.traders.entity.wandering_trader.yes=Wandering Trader agrees
+commands.traders.spawnTrader.usage=/spawnTrader <player>
+commands.traders.spawnTrader.failure=Failed spawning Wandering Trader
+commands.traders.spawnTrader.success=Spawned wandering trader at %1$s

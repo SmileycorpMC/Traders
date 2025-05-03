@@ -1,7 +1,7 @@
 package net.smileycorp.traders.common.entities;
 
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.ai.EntityAIPanic;
+import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -18,8 +18,18 @@ public class EntityTraderLlama extends EntityLlama {
     
     @Override
     protected void initEntityAI() {
-        super.initEntityAI();
         tasks.addTask(1, new EntityAIPanic(this, 2));
+        tasks.addTask(0, new EntityAISwimming(this));
+        tasks.addTask(1, new EntityAIRunAroundLikeCrazy(this, 1.2));
+        tasks.addTask(2, new EntityAILlamaFollowCaravan(this, 2.0999999046325684));
+        tasks.addTask(3, new EntityAIAttackRanged(this, 1.25, 40, 20.0F));
+        tasks.addTask(3, new EntityAIPanic(this, 1.2));
+        tasks.addTask(4, new EntityAIMate(this, 1.0));
+        tasks.addTask(5, new EntityAIFollowParent(this, 1.0));
+        tasks.addTask(6, new EntityAIWanderAvoidWater(this, 0.7));
+        tasks.addTask(7, new EntityAIWatchClosest(this, EntityPlayer.class, 6.0F));
+        tasks.addTask(8, new EntityAILookIdle(this));
+        targetTasks.addTask(1, new AIHurtByTarget(this));
         targetTasks.addTask(1, new EntityAILlamaDefendTrader(this));
     }
     

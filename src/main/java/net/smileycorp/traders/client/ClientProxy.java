@@ -54,8 +54,9 @@ public class ClientProxy extends CommonProxy {
 			return;
 		}
 		if (!(sound instanceof PositionedSound)) return;
-		((PositionedSound)sound).volume = sound.getVolume() * ClientConfig.traderVolume;
-		event.setResultSound(sound);
+		PositionedSound positioned = (PositionedSound) sound;
+		positioned.volume = positioned.volume * ClientConfig.traderVolume;
+		event.setResultSound(positioned);
 	}
 	
 }
