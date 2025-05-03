@@ -37,7 +37,7 @@ public class CommonProxy {
 	
 	@SubscribeEvent
 	public static void worldTick(TickEvent.WorldTickEvent event) {
-		if (event.phase != TickEvent.Phase.END | !(event.world instanceof WorldServer)) return;
+		if (!CommonConfig.tradersSpawn || event.phase != TickEvent.Phase.END | !(event.world instanceof WorldServer)) return;
 		WorldServer world = (WorldServer) event.world;
 		if (world.provider.getDimension() != 0) return;
 		WanderingTraderSpawner.getSpawner(world).tick(world);

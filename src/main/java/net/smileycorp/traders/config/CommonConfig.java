@@ -7,6 +7,7 @@ import java.io.File;
 
 public class CommonConfig {
     
+    public static boolean tradersSpawn;
     public static int tickDelay;
     public static int spawnDelay;
     public static int spawnChance;
@@ -16,6 +17,8 @@ public class CommonConfig {
     public static void syncConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(new File(event.getModConfigurationDirectory().getPath() + "/traders/spawning.cfg"));
         try {
+            tradersSpawn = config.getBoolean("tradersSpawn", "Spawning", true,
+                    "Should traders naturally spawn like vanilla 1.14+?");
             tickDelay = config.getInt("tickDelay", "Spawning", 1200, 0, 10000,
                     "How many ticks before the spawn delay updates?");
             spawnDelay = config.getInt("spawnDelay", "Spawning", 24000, 0, Integer.MAX_VALUE,
