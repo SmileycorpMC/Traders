@@ -5,9 +5,9 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.smileycorp.atlas.api.data.DataType;
 import net.smileycorp.traders.common.TradersLogger;
-import net.smileycorp.traders.config.trades.TradeContext;
 import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.condition.TradeCondition;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 import java.util.List;
 
