@@ -23,7 +23,7 @@ apply plugin: 'java'
 
 version = "1.12.2-1.0.0-DEV"
 group = "net.smileycorp.traders"
-archivesBaseName = "Traders"
+archivesBaseName = "Traders-Backport"
 
 sourceCompatibility = targetCompatibility = compileJava.sourceCompatibility = compileJava.targetCompatibility = '1.8' // Need this here so eclipse task generates correctly.
 
