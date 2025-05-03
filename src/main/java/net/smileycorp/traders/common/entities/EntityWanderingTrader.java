@@ -31,7 +31,7 @@ import net.smileycorp.traders.common.entities.ai.EntityAITraderDrink;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderLookAtTradePlayer;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderTradePlayer;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderWander;
-import net.smileycorp.traders.config.TradeDataLoader;
+import net.smileycorp.traders.config.trades.TradeDataLoader;
 import net.smileycorp.traders.integration.RaidsIntegration;
 
 import javax.annotation.Nullable;

@@ -9,7 +9,7 @@ import net.minecraft.util.NonNullList;
 import net.minecraft.util.math.MathHelper;
 import net.minecraftforge.oredict.OreDictionary;
 import net.smileycorp.atlas.api.data.DataType;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 import net.smileycorp.traders.config.item.functions.ItemFunction;
 import net.smileycorp.traders.config.values.Value;
 import net.smileycorp.traders.config.values.ValueRegistry;

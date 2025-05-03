@@ -1,4 +1,4 @@
-package net.smileycorp.traders.config;
+package net.smileycorp.traders.config.trades;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.world.WorldServer;

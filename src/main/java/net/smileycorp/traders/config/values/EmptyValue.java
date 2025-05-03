@@ -1,7 +1,7 @@
 package net.smileycorp.traders.config.values;
 
 import net.smileycorp.atlas.api.data.DataType;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public class EmptyValue<T extends Comparable<T>> implements Value<T> {
     

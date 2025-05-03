@@ -7,7 +7,7 @@ import net.minecraft.world.storage.WorldInfo;
 import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.smileycorp.atlas.api.data.DataType;
 import net.smileycorp.traders.common.TradersLogger;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public class LevelNBTValue<T extends Comparable<T>> extends NBTValue<T> {
 

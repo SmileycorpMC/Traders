@@ -1,6 +1,6 @@
 package net.smileycorp.traders.config.values;
 
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public class StaticValue<T extends Comparable<T>> implements Value<T> {
     

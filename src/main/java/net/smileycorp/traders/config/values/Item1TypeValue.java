@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.smileycorp.atlas.api.data.DataType;
 import net.smileycorp.traders.common.TradersLogger;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public class Item1TypeValue extends ItemTypeValue {
     

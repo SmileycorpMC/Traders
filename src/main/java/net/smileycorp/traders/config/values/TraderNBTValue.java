@@ -6,7 +6,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.smileycorp.atlas.api.data.DataType;
 import net.smileycorp.traders.common.TradersLogger;
 import net.smileycorp.traders.common.entities.EntityWanderingTrader;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public class TraderNBTValue<T extends Comparable<T>> extends NBTValue<T> {
 

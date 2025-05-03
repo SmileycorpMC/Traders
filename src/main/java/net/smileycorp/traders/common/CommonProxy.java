@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.smileycorp.traders.config.TradeDataLoader;
+import net.smileycorp.traders.config.trades.TradeDataLoader;
 import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.item.functions.FunctionRegistry;
 import net.smileycorp.traders.config.values.ValueRegistry;

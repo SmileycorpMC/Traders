@@ -5,7 +5,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import net.minecraft.item.ItemStack;
 import net.smileycorp.atlas.api.data.DataType;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 import net.smileycorp.traders.config.item.functions.FunctionRegistry;
 import net.smileycorp.traders.config.item.functions.ItemFunction;
 import net.smileycorp.traders.config.values.StaticValue;

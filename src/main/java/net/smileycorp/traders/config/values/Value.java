@@ -2,7 +2,7 @@ package net.smileycorp.traders.config.values;
 
 import com.google.gson.JsonObject;
 import net.smileycorp.atlas.api.data.DataType;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public interface Value<T extends Comparable<T>> {
     

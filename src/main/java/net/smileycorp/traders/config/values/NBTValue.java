@@ -4,7 +4,7 @@ import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.smileycorp.atlas.api.data.DataType;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public abstract class NBTValue<T extends Comparable<T>> implements Value<T> {
 

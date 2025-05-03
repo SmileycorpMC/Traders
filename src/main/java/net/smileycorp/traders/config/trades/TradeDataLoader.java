@@ -1,4 +1,4 @@
-package net.smileycorp.traders.config;
+package net.smileycorp.traders.config.trades;
 
 import com.google.common.collect.Lists;
 import com.google.gson.JsonParser;

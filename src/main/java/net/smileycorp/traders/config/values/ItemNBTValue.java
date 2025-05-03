@@ -2,7 +2,7 @@ package net.smileycorp.traders.config.values;
 
 import net.minecraft.item.ItemStack;
 import net.smileycorp.atlas.api.data.DataType;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public abstract class ItemNBTValue<T extends Comparable<T>> extends NBTValue<T> {
     

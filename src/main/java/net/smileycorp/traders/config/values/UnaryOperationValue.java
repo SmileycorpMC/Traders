@@ -4,7 +4,7 @@ import com.google.gson.JsonObject;
 import net.smileycorp.atlas.api.data.DataType;
 import net.smileycorp.atlas.api.data.UnaryOperation;
 import net.smileycorp.traders.common.TradersLogger;
-import net.smileycorp.traders.config.TradeContext;
+import net.smileycorp.traders.config.trades.TradeContext;
 
 public class UnaryOperationValue<T extends Number & Comparable<T>> implements Value<T> {
     
