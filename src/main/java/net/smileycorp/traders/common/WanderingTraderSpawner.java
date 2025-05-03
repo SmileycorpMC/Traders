@@ -10,6 +10,7 @@ import net.minecraft.world.WorldServer;
 import net.minecraft.world.storage.WorldSavedData;
 import net.smileycorp.traders.common.entities.EntityTraderLlama;
 import net.smileycorp.traders.common.entities.EntityWanderingTrader;
+import net.smileycorp.traders.config.CommonConfig;
 
 public class WanderingTraderSpawner {
     
@@ -18,25 +19,24 @@ public class WanderingTraderSpawner {
     
     public WanderingTraderSpawner(WorldData data) {
         this.data = data;
-        tickDelay = 1200;
+        tickDelay = CommonConfig.tickDelay;
     }
     
     public void tick(WorldServer world) {
         if (tickDelay-- > 0) return;
-        tickDelay = 1200;
+        tickDelay = CommonConfig.tickDelay;
         data.spawnDelay -= 1200;
         if (data.spawnDelay > 0) return;
-        data.spawnDelay = 24000;
+        data.spawnDelay = CommonConfig.spawnDelay;
         if (!world.getGameRules().getBoolean("doMobSpawning")) return;
         if (world.rand.nextInt(100) > data.spawnChance) if (spawn(world)) {
-            data.spawnChance = 25;
+            data.spawnChance = CommonConfig.spawnChance;
             return;
         }
-        data.spawnChance = MathHelper.clamp(data.spawnChance + 25, 25, 75);
+        data.spawnChance = MathHelper.clamp(data.spawnChance + CommonConfig.spawnChanceIncrement, CommonConfig.spawnChance, CommonConfig.maxSpawnChance);
     }
     
     private boolean spawn(WorldServer world) {
-        if (world.rand.nextInt(10) != 0) return false;
         EntityPlayer player = world.playerEntities.get(world.rand.nextInt(world.playerEntities.size()));
         BlockPos pos = player.getPosition();
         Village village = world.getVillageCollection().getNearestVillage(pos, 48);
@@ -88,8 +88,8 @@ public class WanderingTraderSpawner {
         
         public WorldData(String data) {
             super(data);
-            spawnDelay = 24000;
-            spawnChance = 25;
+            spawnDelay = CommonConfig.spawnDelay;
+            spawnChance = CommonConfig.spawnChance;
         }
         
         public WanderingTraderSpawner getSpawner() {

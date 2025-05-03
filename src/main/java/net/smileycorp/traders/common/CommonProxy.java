@@ -8,6 +8,7 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
+import net.smileycorp.traders.config.CommonConfig;
 import net.smileycorp.traders.config.trades.TradeDataLoader;
 import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.item.functions.FunctionRegistry;
@@ -18,6 +19,7 @@ public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event) {
 		TradeDataLoader.init(event);
+		CommonConfig.syncConfig(event);
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -27,9 +29,7 @@ public class CommonProxy {
 		TradeDataLoader.INSTANCE.loadTrades();
 	}
 	
-	public void postInit(FMLPostInitializationEvent event) {
-
-	}
+	public void postInit(FMLPostInitializationEvent event) {}
 	
 	public void serverStart(FMLServerStartingEvent event) {
 
