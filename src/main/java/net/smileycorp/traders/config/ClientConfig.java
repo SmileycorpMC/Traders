@@ -13,7 +13,7 @@ public class ClientConfig {
     public static void syncConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(new File(event.getModConfigurationDirectory().getPath() + "/traders/client.cfg"));
         try {
-            silentTraders = config.getBoolean("silentTraders", "Client", true,
+            silentTraders = config.getBoolean("silentTraders", "Client", false,
                     "Should traders make noise?");
             traderVolume = config.getFloat("traderVolume", "Client", 1, 0, 10,
                     "How loud should trader sounds play? (1 is default volume.)");
