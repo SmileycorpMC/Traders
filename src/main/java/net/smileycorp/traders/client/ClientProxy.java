@@ -48,7 +48,7 @@ public class ClientProxy extends CommonProxy {
 	public static void playSound(PlaySoundEvent event) {
 		ISound sound = event.getSound();
 		if (sound == null) return;
-		if (!Constants.MODID.equals(sound.getSoundLocation().getResourceDomain()))
+		if (!Constants.MODID.equals(sound.getSoundLocation().getResourceDomain())) return;
 		if (ClientConfig.silentTraders) {
 			event.setResultSound(null);
 			return;
