@@ -47,7 +47,7 @@ public class EntityTraderLlama extends EntityLlama {
         if (despawnDelay == 0) return;
         despawnDelay = (getLeashHolder() instanceof EntityWanderingTrader ? ((EntityWanderingTrader) getLeashHolder()).getDespawnDelay()
                 : despawnDelay) - 1;
-        if (despawnDelay == 0) despawnEntity();
+        if (despawnDelay <= 0) despawnEntity();
     }
     
     public void setDespawnDelay(int delay) {

@@ -4,7 +4,6 @@ import net.minecraft.entity.*;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.item.EntityXPOrb;
-import net.minecraft.entity.monster.*;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
 import net.minecraft.item.EnumAction;
@@ -25,7 +24,6 @@ import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.World;
 import net.minecraft.world.storage.loot.LootTableList;
 import net.minecraftforge.event.ForgeEventFactory;
-import net.minecraftforge.fml.common.Loader;
 import net.smileycorp.traders.common.TradersSoundEvents;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderDrink;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderLookAtTradePlayer;
@@ -33,7 +31,6 @@ import net.smileycorp.traders.common.entities.ai.EntityAITraderTradePlayer;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderWander;
 import net.smileycorp.traders.config.EntityConfig;
 import net.smileycorp.traders.config.trades.TradeDataLoader;
-import net.smileycorp.traders.integration.RaidsIntegration;
 
 import javax.annotation.Nullable;
 
@@ -46,7 +43,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     
     public EntityWanderingTrader(World world) {
         super(world);
-        this.setSize(0.6f, 1.95f);
+        setSize(0.6f, 1.95f);
     }
     
     @Override
@@ -55,7 +52,6 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
         tasks.addTask(0, new EntityAITraderDrink(this));
         tasks.addTask(1, new EntityAITraderTradePlayer(this));
         tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, EntityConfig::attacksTraders, 8, 0.5, 0.5));
-        if (Loader.isModLoaded("raids")) RaidsIntegration.addTasks(this);
         tasks.addTask(1, new EntityAIPanic(this, 0.5));
         tasks.addTask(1, new EntityAITraderLookAtTradePlayer(this));
         tasks.addTask(2, new EntityAITraderWander(this));
@@ -87,7 +83,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
             stack.interactWithEntity(player, this, hand);
             return true;
         }
-        if (holdingSpawnEggOfClass(stack, this.getClass()) |! isEntityAlive() || isTrading() || player.isSneaking()) return super.processInteract(player, hand);
+        if (holdingSpawnEggOfClass(stack, getClass()) |! isEntityAlive() || isTrading() || player.isSneaking()) return super.processInteract(player, hand);
         if (world.isRemote) return true;
         if (offers == null) populateBuyingList();
         if (hand == EnumHand.MAIN_HAND) player.addStat(StatList.TALKED_TO_VILLAGER);
