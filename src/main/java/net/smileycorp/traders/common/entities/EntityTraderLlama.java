@@ -7,6 +7,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.world.World;
 import net.smileycorp.traders.common.entities.ai.EntityAILlamaDefendTrader;
+import net.smileycorp.traders.config.EntityConfig;
 
 public class EntityTraderLlama extends EntityLlama {
     
@@ -31,6 +32,12 @@ public class EntityTraderLlama extends EntityLlama {
         tasks.addTask(8, new EntityAILookIdle(this));
         targetTasks.addTask(1, new AIHurtByTarget(this));
         targetTasks.addTask(1, new EntityAILlamaDefendTrader(this));
+    }
+
+    @Override
+    protected void applyEntityAttributes() {
+        super.applyEntityAttributes();
+        EntityConfig.traderLlama.applyAttributes(this);
     }
     
     @Override

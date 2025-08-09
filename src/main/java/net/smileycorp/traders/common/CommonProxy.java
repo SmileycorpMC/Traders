@@ -8,7 +8,8 @@ import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
-import net.smileycorp.traders.config.CommonConfig;
+import net.smileycorp.traders.config.EntityConfig;
+import net.smileycorp.traders.config.SpawnConfig;
 import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.item.functions.FunctionRegistry;
 import net.smileycorp.traders.config.trades.TradeDataLoader;
@@ -19,7 +20,8 @@ public class CommonProxy {
 	
 	public void preInit(FMLPreInitializationEvent event) {
 		TradeDataLoader.init(event);
-		CommonConfig.syncConfig(event);
+		SpawnConfig.syncConfig(event);
+		EntityConfig.syncConfig(event);
 	}
 
 	public void init(FMLInitializationEvent event) {
@@ -37,7 +39,7 @@ public class CommonProxy {
 	
 	@SubscribeEvent
 	public static void worldTick(TickEvent.WorldTickEvent event) {
-		if (!CommonConfig.tradersSpawn || event.phase != TickEvent.Phase.END | !(event.world instanceof WorldServer)) return;
+		if (!SpawnConfig.tradersSpawn || event.phase != TickEvent.Phase.END | !(event.world instanceof WorldServer)) return;
 		WorldServer world = (WorldServer) event.world;
 		if (world.provider.getDimension() != 0) return;
 		WanderingTraderSpawner.getSpawner(world).tick(world);

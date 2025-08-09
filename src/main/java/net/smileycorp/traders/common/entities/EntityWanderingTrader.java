@@ -31,6 +31,7 @@ import net.smileycorp.traders.common.entities.ai.EntityAITraderDrink;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderLookAtTradePlayer;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderTradePlayer;
 import net.smileycorp.traders.common.entities.ai.EntityAITraderWander;
+import net.smileycorp.traders.config.EntityConfig;
 import net.smileycorp.traders.config.trades.TradeDataLoader;
 import net.smileycorp.traders.integration.RaidsIntegration;
 
@@ -71,7 +72,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     @Override
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
-        getEntityAttribute(SharedMonsterAttributes.MOVEMENT_SPEED).setBaseValue(0.5D);
+        EntityConfig.trader.applyAttributes(this);
     }
     
     @Override
