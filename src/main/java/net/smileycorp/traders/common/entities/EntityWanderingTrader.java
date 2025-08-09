@@ -54,11 +54,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
         tasks.addTask(0, new EntityAISwimming(this));
         tasks.addTask(0, new EntityAITraderDrink(this));
         tasks.addTask(1, new EntityAITraderTradePlayer(this));
-        tasks.addTask(1, new EntityAIAvoidEntity(this, EntityZombie.class, 8, 0.5, 0.5));
-        tasks.addTask(1, new EntityAIAvoidEntity(this, EntityEvoker.class, 12, 0.5, 0.5));
-        tasks.addTask(1, new EntityAIAvoidEntity(this, EntityVindicator.class, 8, 0.5, 0.5));
-        tasks.addTask(1, new EntityAIAvoidEntity(this, EntityVex.class, 8, 0.5, 0.5));
-        tasks.addTask(1, new EntityAIAvoidEntity(this, EntityIllusionIllager.class, 12, 0.5, 0.5));
+        tasks.addTask(1, new EntityAIAvoidEntity<>(this, EntityLivingBase.class, EntityConfig::attacksTraders, 8, 0.5, 0.5));
         if (Loader.isModLoaded("raids")) RaidsIntegration.addTasks(this);
         tasks.addTask(1, new EntityAIPanic(this, 0.5));
         tasks.addTask(1, new EntityAITraderLookAtTradePlayer(this));
@@ -105,8 +101,8 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     protected void updateAITasks() {
         super.updateAITasks();
         if (world.isRemote) return;
-        if (despawnDelay == 0 || isTrading()) return;
-        if (despawnDelay-- == 0) despawnEntity();
+        if (isTrading()) return;
+        if (despawnDelay-- <= 0) setDead();
     }
     
     public boolean isTrading() {
