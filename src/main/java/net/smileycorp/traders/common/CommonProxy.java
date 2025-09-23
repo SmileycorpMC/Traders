@@ -6,6 +6,7 @@ import net.minecraft.entity.ai.EntityAIFindEntityNearest;
 import net.minecraft.entity.ai.EntityAINearestAttackableTarget;
 import net.minecraft.world.WorldServer;
 import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.fml.common.Loader;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 import net.minecraftforge.fml.common.event.FMLPostInitializationEvent;
@@ -20,6 +21,7 @@ import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.item.functions.FunctionRegistry;
 import net.smileycorp.traders.config.trades.TradeDataLoader;
 import net.smileycorp.traders.config.values.ValueRegistry;
+import net.smileycorp.traders.integration.TinkersConstructIntegration;
 
 @Mod.EventBusSubscriber
 public class CommonProxy {
@@ -35,6 +37,7 @@ public class CommonProxy {
 		ValueRegistry.INSTANCE.registerDefaultValues();
 		FunctionRegistry.INSTANCE.registerDefaultValues();
 		TradeDataLoader.INSTANCE.loadTrades();
+		if (Loader.isModLoaded("tconstruct")) TinkersConstructIntegration.registerRecipes();
 	}
 	
 	public void postInit(FMLPostInitializationEvent event) {}
