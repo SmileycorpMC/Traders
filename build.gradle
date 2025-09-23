@@ -63,7 +63,7 @@ configurations {
 
 dependencies {
     minecraft 'net.minecraftforge:forge:1.12.2-14.23.5.2860'
-    implementation "curse.maven:atlas-463826:5877784"
+    implementation "curse.maven:atlas-463826:6981034"
     implementation "curse.maven:raids-977633:5626565"
 }
 

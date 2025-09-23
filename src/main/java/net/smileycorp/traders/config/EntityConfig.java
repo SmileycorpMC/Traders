@@ -7,6 +7,7 @@ import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.config.Configuration;
 import net.minecraftforge.fml.common.event.FMLPreInitializationEvent;
 import net.minecraftforge.registries.GameData;
+import net.smileycorp.atlas.api.config.EntityAttributesEntry;
 import net.smileycorp.traders.common.TradersLogger;
 
 import java.io.File;
@@ -32,13 +33,13 @@ public class EntityConfig {
                     "How long should wandering traders exist for before despawning?");
             wanderRange = config.getInt("wanderRange", "Wandering Trader", 16, 0, Integer.MAX_VALUE,
                     "How far can wandering traders wander from their home point?");
-            trader = new EntityAttributesEntry(config, "Wandering Trader", 0.7, 20, 0, 0, 0, 16);
+            trader = new EntityAttributesEntry(config, "Wandering Trader", 0.7, 16, 0, 20, 0, 0, 0);
             attacksTradersStr = config.get("Wandering Trader", "attacksTraders", new String[] {"minecraft:zombie", "minecraft:vindication_illager",
                             "minecraft:evocation_illager", "minecraft:illusion_illager", "minecraft:vex", "raids:pillager", "raids:ravager", "tektopia:necromancer"},
                     "Entities that are aggressive to wandering traders, and they flee from.").getStringList();
 
             //trader llama
-            traderLlama = new EntityAttributesEntry(config, "Trader Llama", 0.175, 53, 0, 0, 0, 40);
+            traderLlama = new EntityAttributesEntry(config, "Trader Llama", 0.175, 40, 0, 53, 0, 0, 0);
 
         } catch (Exception e) {
         } finally {
