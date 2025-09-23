@@ -39,7 +39,7 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
     private EntityPlayer buyingPlayer;
     private MerchantRecipeList offers;
     private BlockPos wanderTarget;
-    private int despawnDelay;
+    private int despawnDelay = -1;
     
     public EntityWanderingTrader(World world) {
         super(world);
@@ -98,7 +98,8 @@ public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerch
         super.updateAITasks();
         if (world.isRemote) return;
         if (isTrading()) return;
-        if (despawnDelay-- <= 0) setDead();
+        if (despawnDelay < 0) return;
+        if (despawnDelay-- == 0) setDead();
     }
     
     public boolean isTrading() {

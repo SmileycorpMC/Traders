@@ -11,7 +11,7 @@ import net.smileycorp.traders.config.EntityConfig;
 
 public class EntityTraderLlama extends EntityLlama {
     
-    private int despawnDelay;
+    private int despawnDelay = -1;
     
     public EntityTraderLlama(World world) {
         super(world);
@@ -44,10 +44,10 @@ public class EntityTraderLlama extends EntityLlama {
     protected void updateAITasks() {
         super.updateAITasks();
         if (world.isRemote) return;
-        if (despawnDelay == 0) return;
+        if (despawnDelay < 0) return;
         despawnDelay = (getLeashHolder() instanceof EntityWanderingTrader ? ((EntityWanderingTrader) getLeashHolder()).getDespawnDelay()
                 : despawnDelay) - 1;
-        if (despawnDelay <= 0) despawnEntity();
+        if (despawnDelay == 0) setDead();
     }
     
     public void setDespawnDelay(int delay) {
