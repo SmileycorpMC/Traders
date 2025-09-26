@@ -1,6 +1,7 @@
 package net.smileycorp.traders.common.entities;
 
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.ai.*;
 import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.player.EntityPlayer;
@@ -32,6 +33,8 @@ public class EntityTraderLlama extends EntityLlama {
         tasks.addTask(8, new EntityAILookIdle(this));
         targetTasks.addTask(1, new AIHurtByTarget(this));
         targetTasks.addTask(1, new EntityAILlamaDefendTrader(this));
+        targetTasks.addTask(3, new EntityAINearestAttackableTarget<>(this, EntityLivingBase.class, 10,
+                true, false, EntityConfig::attacksTraders));
     }
 
     @Override
