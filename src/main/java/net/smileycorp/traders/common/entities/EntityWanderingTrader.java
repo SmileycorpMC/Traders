@@ -34,7 +34,7 @@ import net.smileycorp.traders.config.trades.TradeDataLoader;
 
 import javax.annotation.Nullable;
 
-public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerchant{
+public class EntityWanderingTrader extends EntityAgeable implements INpc, IMerchant {
     
     private EntityPlayer buyingPlayer;
     private MerchantRecipeList offers;

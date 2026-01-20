@@ -1,6 +1,5 @@
 package net.smileycorp.traders.integration;
 
-import net.minecraft.entity.monster.EntityVindicator;
 import net.minecraftforge.fluids.FluidStack;
 import net.smileycorp.traders.common.entities.EntityWanderingTrader;
 import slimeknights.tconstruct.library.TinkerRegistry;
