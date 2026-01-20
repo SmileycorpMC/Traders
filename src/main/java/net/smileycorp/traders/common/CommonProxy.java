@@ -59,7 +59,7 @@ public class CommonProxy {
 		if (event.getWorld().isRemote) return;
 		if (!EntityConfig.attacksTraders(event.getEntity())) return;
 		EntityLiving entity = (EntityLiving) event.getEntity();
-		entity.targetTasks.addTask(1, entity instanceof EntityCreature ?
+		entity.targetTasks.addTask(3, entity instanceof EntityCreature ?
 				new EntityAINearestAttackableTarget<>((EntityCreature) entity, EntityWanderingTrader.class, false)
 				: new EntityAIFindEntityNearest(entity, EntityWanderingTrader.class));
 	}
