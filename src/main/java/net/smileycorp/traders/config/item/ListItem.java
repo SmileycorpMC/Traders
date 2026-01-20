@@ -12,7 +12,10 @@ import net.smileycorp.traders.config.trades.TradeContext;
 import net.smileycorp.traders.config.values.StaticValue;
 import net.smileycorp.traders.config.values.Value;
 
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ListItem implements TradeItem {
     
@@ -46,7 +49,14 @@ public class ListItem implements TradeItem {
         for (ItemFunction func :  functions) stack = func.apply(stack, ctx);
         return stack;
     }
-    
+
+    @Override
+    public List<ItemStack> getPossibleStacks(TradeContext ctx) {
+        return items.stream().map(item -> item.getPossibleStacks(ctx)).flatMap(List::stream)
+                .peek(stack -> Arrays.stream(functions).forEach(func -> func.apply(stack, ctx)))
+                .collect(Collectors.toList());
+    }
+
     @Override
     public String toString() {
         return json;

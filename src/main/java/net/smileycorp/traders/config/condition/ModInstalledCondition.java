@@ -20,7 +20,12 @@ public class ModInstalledCondition implements TradeCondition {
     public boolean apply(TradeContext ctx) {
         return Loader.isModLoaded(value.get(ctx));
     }
-    
+
+    @Override
+    public boolean addToJEI() {
+        return Loader.isModLoaded(value.get(TradeContext.DEFAULT));
+    }
+
     public static ModInstalledCondition deserialize(JsonObject json) {
         try {
             return new ModInstalledCondition(ValueRegistry.INSTANCE.readValue(DataType.STRING, json.get("value")));

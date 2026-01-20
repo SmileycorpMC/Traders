@@ -19,6 +19,10 @@ public interface TradeItem {
     TradeItem EMPTY = ctx -> ItemStack.EMPTY;
     
     ItemStack get(TradeContext ctx);
+
+    default List<ItemStack> getPossibleStacks(TradeContext ctx) {
+        return Lists.newArrayList(get(TradeContext.DEFAULT));
+    }
     
     static TradeItem deserialize(JsonElement json) {
         if (json.isJsonArray()) {

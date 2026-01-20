@@ -48,6 +48,11 @@ public class Trade {
         int max_uses = this.max_uses.get(ctx);
         return new MerchantRecipe(item1, item2, output.get(ctx), 0, max_uses);
     }
+
+    public boolean addToJEI() {
+       for (TradeCondition condition : conditions) if (!condition.addToJEI()) return false;
+       return true;
+    }
     
     @Override
     public String toString() {

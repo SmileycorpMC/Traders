@@ -1,11 +1,15 @@
 package net.smileycorp.traders.config.trades;
 
 import net.minecraft.item.ItemStack;
+import net.minecraft.server.MinecraftServer;
 import net.minecraft.world.WorldServer;
+import net.minecraftforge.fml.common.FMLCommonHandler;
 import net.smileycorp.traders.common.entities.EntityWanderingTrader;
 
 public class TradeContext {
-    
+
+    public static final TradeContext DEFAULT = new TradeContext(new EntityWanderingTrader(null));
+
     private final EntityWanderingTrader trader;
     private ItemStack item1 = ItemStack.EMPTY, item2 = ItemStack.EMPTY;
     
@@ -36,7 +40,12 @@ public class TradeContext {
     }
     
     public WorldServer getWorld() {
-        return (WorldServer) trader.getWorld();
+        WorldServer world = (WorldServer) trader.getWorld();
+        return world == null ? FMLCommonHandler.instance().getMinecraftServerInstance().getWorld(0) : world;
+    }
+
+    public boolean ignoreConditions() {
+        return trader.world == null;
     }
     
     public TradeContext copy() {

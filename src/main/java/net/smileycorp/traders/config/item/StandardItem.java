@@ -15,6 +15,9 @@ import net.smileycorp.traders.config.values.StaticValue;
 import net.smileycorp.traders.config.values.Value;
 import net.smileycorp.traders.config.values.ValueRegistry;
 
+import java.util.Collections;
+import java.util.List;
+
 public class StandardItem implements TradeItem {
     
     private final Value<String> item, nbt;
@@ -47,7 +50,12 @@ public class StandardItem implements TradeItem {
         }
         return ItemStack.EMPTY;
     }
-    
+
+    @Override
+    public List<ItemStack> getPossibleStacks(TradeContext ctx) {
+        return Collections.emptyList();
+    }
+
     @Override
     public String toString() {
         return json;

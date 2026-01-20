@@ -14,6 +14,10 @@ import net.smileycorp.traders.config.trades.TradeContext;
 import net.smileycorp.traders.config.values.Value;
 import net.smileycorp.traders.config.values.ValueRegistry;
 
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 public class OreDictItem implements TradeItem {
     
     private final Value<String> ore, nbt;
@@ -46,6 +50,13 @@ public class OreDictItem implements TradeItem {
         } catch (Exception e) {}
         for (ItemFunction func :  functions) stack = func.apply(stack, ctx);
         return stack;
+    }
+
+    @Override
+    public List<ItemStack> getPossibleStacks(TradeContext ctx) {
+        return OreDictionary.getOres(ore.get(ctx)).stream().map(ItemStack::copy)
+                .peek(stack -> Arrays.stream(functions).forEach(func -> func.apply(stack, ctx)))
+                .collect(Collectors.toList());
     }
     
     @Override

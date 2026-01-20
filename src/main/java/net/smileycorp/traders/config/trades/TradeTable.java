@@ -9,11 +9,12 @@ import net.smileycorp.traders.config.condition.ConditionRegistry;
 import net.smileycorp.traders.config.condition.TradeCondition;
 
 import java.util.Collection;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Random;
 import java.util.stream.Collectors;
 
-public class TradeTable {
+public class TradeTable implements Iterable<Trade> {
     
     private final int min, max;
     private final List<TradeCondition> conditions;
@@ -52,9 +53,19 @@ public class TradeTable {
         }
         return recipes;
     }
-    
-    private List<Trade> filterTrades(TradeContext ctx) {
+
+    public List<Trade> filterTrades(TradeContext ctx) {
         return trades.stream().filter(trade -> trade.canApply(ctx)).collect(Collectors.toList());
+    }
+
+    @Override
+    public Iterator<Trade> iterator() {
+        return trades.iterator();
+    }
+
+    public boolean addToJEI() {
+        for (TradeCondition condition : conditions) if (!condition.addToJEI()) return false;
+        return true;
     }
     
     static TradeTable deserialize(JsonElement json) throws Exception {
@@ -83,6 +94,5 @@ public class TradeTable {
         }
         return new TradeTable(min, max, conditions, trades);
     }
-
 
 }

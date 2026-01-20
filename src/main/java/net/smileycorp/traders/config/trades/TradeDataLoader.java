@@ -59,4 +59,8 @@ public class TradeDataLoader {
         return trades;
     }
 
+    public List<TradeTable> getTrades() {
+        return Lists.newArrayList(tables);
+    }
+
 }
