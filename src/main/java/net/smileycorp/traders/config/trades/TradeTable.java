@@ -41,10 +41,12 @@ public class TradeTable {
             MerchantRecipe recipe = trade.generate(ctx);
             if (recipe.getItemToBuy().isEmpty()) {
                 TradersLogger.logInfo("trade " + trade + " has empty item_1, not adding trade");
+                i--;
                 continue;
             }
             if (recipe.getItemToSell().isEmpty()) {
                 TradersLogger.logInfo("trade " + trade + " has empty output, not adding trade");
+                i--;
                 continue;
             }
             recipes.add(recipe);
