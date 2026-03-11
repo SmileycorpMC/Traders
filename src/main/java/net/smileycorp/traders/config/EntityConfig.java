@@ -24,6 +24,7 @@ public class EntityConfig {
 
     //trader llama
     public static EntityAttributesEntry traderLlama;
+    public static int traderLlamaHealthBonus;
 
     public static void syncConfig(FMLPreInitializationEvent event) {
         Configuration config = new Configuration(new File(event.getModConfigurationDirectory().getPath() + "/traders/entities.cfg"));
@@ -39,7 +40,9 @@ public class EntityConfig {
                     "Entities that are aggressive to wandering traders, and they flee from.").getStringList();
 
             //trader llama
-            traderLlama = new EntityAttributesEntry(config, "Trader Llama", 0.175, 40, 0, 53, 0, 0, 0);
+            traderLlama = new EntityAttributesEntry(config, "Trader Llama", 0.175, 40, 0, 15, 0, 0, 0);
+            traderLlamaHealthBonus = config.getInt("healthBonus", "Trader Llama", 15, 0, Integer.MAX_VALUE,
+                    "How much random extra health can Trader Llamas spawn with over their default max?");
 
         } catch (Exception e) {
         } finally {

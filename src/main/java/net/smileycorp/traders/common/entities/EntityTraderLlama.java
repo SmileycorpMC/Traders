@@ -2,7 +2,10 @@ package net.smileycorp.traders.common.entities;
 
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.*;
+import net.minecraft.entity.ai.attributes.IAttribute;
+import net.minecraft.entity.ai.attributes.IAttributeInstance;
 import net.minecraft.entity.passive.EntityLlama;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
@@ -41,6 +44,13 @@ public class EntityTraderLlama extends EntityLlama {
     protected void applyEntityAttributes() {
         super.applyEntityAttributes();
         EntityConfig.traderLlama.applyAttributes(this);
+        IAttributeInstance attribute = getEntityAttribute(SharedMonsterAttributes.MAX_HEALTH);
+        int bonus1 = (int) Math.floor((float) EntityConfig.traderLlamaHealthBonus * 0.5f);
+        int bonus2 = Math.round((float) EntityConfig.traderLlamaHealthBonus * 0.5f);
+        double health = attribute.getAttributeValue();
+        if (bonus1 > 1) health += rand.nextInt(bonus1);
+        if (bonus2 > 1) health += rand.nextInt(bonus2);
+        attribute.setBaseValue(health);
     }
     
     @Override
