@@ -30,7 +30,7 @@ public class WanderingTraderSpawner {
         if (data.spawnDelay > 0) return;
         data.spawnDelay = SpawnConfig.spawnDelay;
         if (!world.getGameRules().getBoolean("doMobSpawning")) return;
-        if (world.rand.nextInt(100) > data.spawnChance) if (spawn(world)) {
+        if (world.rand.nextInt(100) <= data.spawnChance && spawn(world)) {
             data.spawnChance = SpawnConfig.spawnChance;
             return;
         }
