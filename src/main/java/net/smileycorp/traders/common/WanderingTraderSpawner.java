@@ -68,6 +68,7 @@ public class WanderingTraderSpawner {
         llama.setPosition(pos.getX() + 0.5f, pos.getY(), pos.getZ() + 0.5f);
         world.spawnEntity(llama);
         llama.setLeashHolder(trader, true);
+        llama.setDespawnDelay(EntityConfig.despawnDelay);
     }
     
     private BlockPos findSpawnPosition(WorldServer world, BlockPos pos, int range) {

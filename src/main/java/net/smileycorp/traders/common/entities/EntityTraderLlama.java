@@ -13,6 +13,8 @@ import net.minecraft.world.World;
 import net.smileycorp.traders.common.entities.ai.EntityAILlamaDefendTrader;
 import net.smileycorp.traders.config.EntityConfig;
 
+import java.util.UUID;
+
 public class EntityTraderLlama extends EntityLlama {
     
     private int despawnDelay = -1;
@@ -58,9 +60,10 @@ public class EntityTraderLlama extends EntityLlama {
         super.updateAITasks();
         if (world.isRemote) return;
         if (despawnDelay < 0) return;
-        despawnDelay = (getLeashHolder() instanceof EntityWanderingTrader ? ((EntityWanderingTrader) getLeashHolder()).getDespawnDelay()
-                : despawnDelay) - 1;
-        if (despawnDelay == 0) setDead();
+        despawnDelay = (getLeashHolder() instanceof EntityWanderingTrader ?
+                ((EntityWanderingTrader) getLeashHolder()).getDespawnDelay() : despawnDelay) - 1;
+        if (despawnDelay == 0 &! (isTame() || getRidingEntity() != null || (getLeashed()
+                &! (getLeashHolder() instanceof EntityWanderingTrader)))) setDead();
     }
     
     public void setDespawnDelay(int delay) {
@@ -93,5 +96,5 @@ public class EntityTraderLlama extends EntityLlama {
         super.writeEntityToNBT(nbt);
         nbt.setInteger("DespawnDelay", despawnDelay);
     }
-    
+
 }
